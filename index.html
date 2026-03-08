@@ -32,20 +32,48 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 @keyframes handAppear{ 0%{opacity:0;transform:scale(0.7)} 100%{opacity:0.95;transform:scale(1)} }
 .glitchText{ animation:glitch 0.2s infinite; }
 @keyframes glitch{ 0%{transform:translate(2px,-2px)} 50%{transform:translate(-2px,2px)} 100%{transform:translate(0)} }
+
+/* スタート画面の追加スタイル */
+#startOverlay{
+  position:fixed; top:0; left:0; width:100%; height:100%; 
+  background:black; z-index:10000; 
+  display:flex; flex-direction:column; justify-content:center; align-items:center; 
+  text-align:center; cursor:pointer; padding:20px;
+}
+.warning-box{
+  border:1px solid #444; padding:40px; max-width:600px; background:rgba(10,10,10,0.9);
+}
+.warning-title{ color:red; font-size:24px; margin-bottom:20px; font-weight:bold; }
+.warning-text{ font-size:16px; line-height:1.8; margin-bottom:30px; color:#ccc; }
+.start-btn{ color:white; border:1px solid white; padding:15px 40px; letter-spacing:4px; transition:0.3s; }
+.start-btn:hover{ background:white; color:black; }
 </style>
 </head>
 <body>
 
-<div id="startOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;">
-  <h1 style="font-size: 50px; letter-spacing: 5px;">グループ活動</h1>
-  <p>クリックして開始</p>
+<div id="startOverlay">
+  <div class="warning-box">
+    <div class="warning-title">⚠ 警告</div>
+    <div class="warning-text">
+      このサイトを最後まで閲覧すると、<br>
+      あなたの身に“何か”が起こるかもしれません。<br>
+      それでも閲覧しますか？<br><br>
+      <small style="font-size:13px;">
+      ※自己責任でお進みください。<br>
+      このサイトにはホラー演出が含まれています。<br>
+      突然の音や画像による演出があります。<br>
+      苦手な方は閲覧をお控えください。
+      </small>
+    </div>
+    <div class="start-btn">閲覧を開始する</div>
+  </div>
 </div>
 
 <header><div class="logo">グループ活動</div><nav><a href="#story">STORY</a><a href="#cast">CAST</a><a href="#staff">STAFF</a></nav></header>
 <section class="hero"><h1>グループ活動</h1><p>6人で始まった、はずだった。</p></section>
 <section id="story"><h2>STORY</h2><p>とある授業で結成された6人のグループ。</p><p>だが発表当日、教室に集まったのは5人。</p><p>担任は言う。「最初から5人だろ？」</p><p>それでも全員覚えている。確かに“もう一人”いた。</p><p>放課後、黒板に浮かぶ赤い文字。「なんで」</p></section>
 <section id="cast"><h2>CAST</h2><div class="cast-grid"><div class="cast">生徒A</div><div class="cast">生徒B</div><div class="cast">生徒C</div><div class="cast">生徒D</div><div class="cast">生徒E</div><div class="cast">？？？</div></div></section>
-<section id="staff"><h2>STAFF</h2><p>監督：尾〇遥〇〇</p><p>脚本：〇池夢〇</p><p>撮影：白〇千〇</p><p>美術：〇施〇</p><p>音楽：中〇〇</p></section>
+<section id="staff"><h2>STAFF</h2><p>監督：尾〇遥〇〇</p><p>脚本：〇池夢〇</p><p>撮影：〇井〇聖</p><p>美術：布〇〇</p><p>音楽：〇〇舞</p></section>
 <footer>© 2026 グループ活動製作委員会</footer>
 
 <div id="noiseOverlay"></div>
@@ -62,12 +90,24 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 <script>
 let triggered=false, noiseTriggered=false;
 
-// クリック時にすべての音源を一度読み込ませることで再生許可を得る
 document.getElementById("startOverlay").addEventListener("click", function() {
   this.style.display = "none";
-  const allAudios = [document.getElementById("droneSound"), document.getElementById("afterSound"), document.getElementById("ambienceSound"), document.getElementById("scareSound"), document.getElementById("noiseSound")];
-  allAudios.forEach(a => a.load());
-  document.getElementById("droneSound").play();
+  const allAudios = [
+    document.getElementById("droneSound"), 
+    document.getElementById("afterSound"), 
+    document.getElementById("ambienceSound"), 
+    document.getElementById("scareSound"), 
+    document.getElementById("noiseSound")
+  ];
+  allAudios.forEach(a => {
+      a.load();
+      a.muted = true; // 一瞬ミュートで再生して許可を取る
+      a.play().then(() => { a.pause(); a.muted = false; a.currentTime = 0; });
+  });
+  
+  setTimeout(() => {
+    document.getElementById("droneSound").play();
+  }, 100);
 });
 
 window.addEventListener("scroll", function(){
@@ -112,8 +152,13 @@ function startNandeEffect(){
 function endHorrorSite(){
   document.getElementById("scaryOverlay").style.display="none";
   document.body.classList.add("blood");
-  // 確実に afterSound を再生
+  
+  // ★一番上までスクロールさせる
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // 音楽を afterSound に切り替え
   document.getElementById("afterSound").play();
+  
   spawnBloodHands();
   corruptText();
 }
@@ -137,6 +182,7 @@ function corruptText(){
   let texts=document.querySelectorAll("p,h1,h2,.cast");
   setInterval(function(){
     let target=texts[Math.floor(Math.random()*texts.length)];
+    if(!target) return;
     let original=target.innerText;
     target.innerText=original.split("").map(c=>Math.random()<0.35?"":c).join("");
     target.classList.add("glitchText");
