@@ -71,7 +71,19 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 
 <header><div class="logo">グループ活動</div><nav><a href="#story">STORY</a><a href="#cast">CAST</a><a href="#staff">STAFF</a></nav></header>
 <section class="hero"><h1>グループ活動</h1><p>6人で始まった、はずだった。</p></section>
-<section id="story"><h2>STORY</h2><p>とある授業で結成された6人のグループ。</p><p>だが発表当日、教室に集まったのは5人。</p><p>担任は言う。「最初から5人だろ？」</p><p>それでも全員覚えている。確かに“もう一人”いた。</p><p>放課後、黒板に浮かぶ赤い文字。「なんで」</p></section>
+<section id="story">
+  <h2>STORY</h2>
+  <p>グループ発表の当日、5人は凍りついた。手元には確かに6人分の資料があり、誰もが昨夜まで“あいつ”と笑い合っていた記憶がある。それなのに、担任の言葉ひとつで、その存在はまるで最初からなかったかのように世界から消失した。</p>
+  <p>かつて自分たちが退屈しのぎに標的とし、課題を全て押し付け、冷たい罵声を浴びせ続け、最後にはその脆弱な心を完膚なきまでに叩き壊した“あいつ”。誰よりも大人しく、都合のいい玩具だったはずのあいつが、どこへ消えたのか。</p>
+  <p>放課後の教室。静寂を破り、黒板にドロリとした赤い雫が這い回る。<br>
+  湿った音とともに刻まれたのは、ただ二文字の問い。</p>
+  <p>『なんで』</p>
+  <p>それは、彼らが葬り去ったはずの記憶の断末魔。<br>
+  窓の外には誰もいないはずなのに、教室内には湿った腐敗臭と、関節が鳴る異様な音が満ちていく。</p>
+  <p>「見つけた」</p>
+  <p>背後から聞こえたその声は、かつて5人が嘲笑いながら追い詰めた、あの生徒の声だった。<br>
+  逃げ場はない。6人目の座席は、今もそこに空いたまま、彼らを待ち受けている。</p>
+</section>
 <section id="cast"><h2>CAST</h2><div class="cast-grid"><div class="cast">生徒A</div><div class="cast">生徒B</div><div class="cast">生徒C</div><div class="cast">生徒D</div><div class="cast">生徒E</div><div class="cast">？？？</div></div></section>
 <section id="staff"><h2>STAFF</h2><p>監督：尾〇遥〇〇</p><p>脚本：〇池夢〇</p><p>撮影：〇井〇聖</p><p>美術：布〇〇</p><p>音楽：〇〇舞</p></section>
 <footer>© 2026 グループ活動製作委員会</footer>
@@ -167,14 +179,53 @@ function spawnBloodHands(){
   let handCount=0;
   const overlay=document.getElementById("handOverlay");
   let interval=setInterval(function(){
-    if(handCount>=6){ clearInterval(interval); return; }
-    let hand=document.createElement("img");
-    hand.src="hand.png"; hand.className="bloodHand";
-    hand.style.left=Math.random()*100+"vw"; hand.style.top=Math.random()*100+"vh";
-    hand.style.transform="rotate("+Math.random()*360+"deg)";
-    hand.style.width=(250+Math.random()*200)+"px";
-    overlay.appendChild(hand);
-    handCount++;
+    function startNandeEffect(){
+  document.getElementById("droneSound").pause();
+  document.getElementById("ambienceSound").play();
+  const overlay=document.getElementById("nandeOverlay");
+  overlay.style.display="block";
+
+  // ★追加：表示したいワードのリスト
+  const horrorWords = [
+    "なんで", "お前が死ね", "うしろ", "みてるよ", 
+    "ゆるさない", "つぎはお前だ", "たすけて", "かえして", 
+    "しね", "くるな", "そこにいるの？", "つかまえた"
+  ];
+
+  let count=0;
+  let interval=setInterval(function(){
+    let span=document.createElement("span");
+    span.className="nande"; 
+
+    // ★修正：ランダムにワードを選択
+    span.innerText = horrorWords[Math.floor(Math.random() * horrorWords.length)];
+
+    span.style.top=Math.random()*100+"%"; 
+    span.style.left=Math.random()*100+"%";
+    span.style.fontSize=(30+Math.random()*60)+"px";
+    span.style.transform="rotate("+(Math.random()*20-10)+"deg)";
+    
+    // 特定のワード（お前が死ね等）だけさらに大きく、赤を濃くする演出も可能です
+    if(span.innerText === "お前が死ね") {
+      span.style.fontWeight = "900";
+      span.style.textShadow = "0 0 10px rgba(255,0,0,0.8)";
+    }
+
+    overlay.appendChild(span);
+    count++;
+
+    if(count>150){
+      clearInterval(interval);
+      setTimeout(function(){
+        overlay.style.display="none";
+        document.getElementById("ambienceSound").pause();
+        document.getElementById("scaryOverlay").style.display="flex";
+        document.getElementById("scareSound").play();
+      }, 600);
+      setTimeout(endHorrorSite, 3500);
+    }
+  }, 25);
+}
   }, 900);
 }
 
