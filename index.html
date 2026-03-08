@@ -28,21 +28,10 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 .blood{ background:black !important; color:#ff2a2a; filter:contrast(120%) brightness(70%); }
 .blood .hero{ background:black !important; }
 #handOverlay{ position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:50; }
-.bloodHand{ position:absolute; opacity:0; animation:handAppear 2s forwards; mix-blend-mode:multiply; }
-@keyframes handAppear{ 0%{opacity:0;transform:scale(0.7)} 100%{opacity:0.95;transform:scale(1)} }
 .glitchText{ animation:glitch 0.2s infinite; }
 @keyframes glitch{ 0%{transform:translate(2px,-2px)} 50%{transform:translate(-2px,2px)} 100%{transform:translate(0)} }
-
-/* スタート画面の追加スタイル */
-#startOverlay{
-  position:fixed; top:0; left:0; width:100%; height:100%; 
-  background:black; z-index:10000; 
-  display:flex; flex-direction:column; justify-content:center; align-items:center; 
-  text-align:center; cursor:pointer; padding:20px;
-}
-.warning-box{
-  border:1px solid #444; padding:40px; max-width:600px; background:rgba(10,10,10,0.9);
-}
+#startOverlay{ position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; cursor:pointer; padding:20px; }
+.warning-box{ border:1px solid #444; padding:40px; max-width:600px; background:rgba(10,10,10,0.9); }
 .warning-title{ color:red; font-size:24px; margin-bottom:20px; font-weight:bold; }
 .warning-text{ font-size:16px; line-height:1.8; margin-bottom:30px; color:#ccc; }
 .start-btn{ color:white; border:1px solid white; padding:15px 40px; letter-spacing:4px; transition:0.3s; }
@@ -54,17 +43,7 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 <div id="startOverlay">
   <div class="warning-box">
     <div class="warning-title">⚠ 警告</div>
-    <div class="warning-text">
-      このサイトを最後まで閲覧すると、<br>
-      あなたの身に“何か”が起こるかもしれません。<br>
-      それでも閲覧しますか？<br><br>
-      <small style="font-size:13px;">
-      ※自己責任でお進みください。<br>
-      このサイトにはホラー演出が含まれています。<br>
-      突然の音や画像による演出があります。<br>
-      苦手な方は閲覧をお控えください。
-      </small>
-    </div>
+    <div class="warning-text">このサイトを最後まで閲覧すると、あなたの身に“何か”が起こるかもしれません。<br>それでも閲覧しますか？</div>
     <div class="start-btn">閲覧を開始する</div>
   </div>
 </div>
@@ -75,14 +54,10 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
   <h2>STORY</h2>
   <p>グループ発表の当日、5人は凍りついた。手元には確かに6人分の資料があり、誰もが昨夜まで“あいつ”と笑い合っていた記憶がある。それなのに、担任の言葉ひとつで、その存在はまるで最初からなかったかのように世界から消失した。</p>
   <p>かつて自分たちが退屈しのぎに標的とし、課題を全て押し付け、冷たい罵声を浴びせ続け、最後にはその脆弱な心を完膚なきまでに叩き壊した“あいつ”。誰よりも大人しく、都合のいい玩具だったはずのあいつが、どこへ消えたのか。</p>
-  <p>放課後の教室。静寂を破り、黒板にドロリとした赤い雫が這い回る。<br>
-  湿った音とともに刻まれたのは、ただ二文字の問い。</p>
-  <p>『なんで』</p>
-  <p>それは、彼らが葬り去ったはずの記憶の断末魔。<br>
-  窓の外には誰もいないはずなのに、教室内には湿った腐敗臭と、関節が鳴る異様な音が満ちていく。</p>
+  <p>放課後の教室。静寂を破り、黒板にドロリとした赤い雫が這い回る。<br>湿った音とともに刻まれたのは、ただ二文字の問い。<br>『なんで』</p>
+  <p>それは、彼らが葬り去ったはずの記憶の断末魔。<br>窓の外には誰もいないはずなのに、教室内には湿った腐敗臭と、関節が鳴る異様な音が満ちていく。</p>
   <p>「見つけた」</p>
-  <p>背後から聞こえたその声は、かつて5人が嘲笑いながら追い詰めた、あの生徒の声だった。<br>
-  逃げ場はない。6人目の座席は、今もそこに空いたまま、彼らを待ち受けている。</p>
+  <p>背後から聞こえたその声は、かつて5人が嘲笑いながら追い詰めた、あの生徒の声だった。<br>逃げ場はない。6人目の座席は、今もそこに空いたまま、彼らを待ち受けている。</p>
 </section>
 <section id="cast"><h2>CAST</h2><div class="cast-grid"><div class="cast">生徒A</div><div class="cast">生徒B</div><div class="cast">生徒C</div><div class="cast">生徒D</div><div class="cast">生徒E</div><div class="cast">？？？</div></div></section>
 <section id="staff"><h2>STAFF</h2><p>監督：尾〇遥〇〇</p><p>脚本：〇池夢〇</p><p>撮影：〇井〇聖</p><p>美術：布〇〇</p><p>音楽：〇〇舞</p></section>
@@ -93,39 +68,23 @@ footer{ padding:80px; text-align:center; font-size:13px; background:rgba(0,0,0,0
 <div id="scaryOverlay"><img src="scary.jpg"></div>
 <div id="handOverlay"></div>
 
-<audio id="noiseSound" src="noise.mp3" preload="auto"></audio>
-<audio id="ambienceSound" src="ambience.mp3" loop preload="auto"></audio>
-<audio id="scareSound" src="scare.mp3" preload="auto"></audio>
-<audio id="droneSound" src="drone.mp3" loop preload="auto"></audio>
-<audio id="afterSound" src="after_horror.mp3" loop preload="auto"></audio>
+<audio id="noiseSound" src="noise.mp3"></audio>
+<audio id="ambienceSound" src="ambience.mp3" loop></audio>
+<audio id="scareSound" src="scare.mp3"></audio>
+<audio id="droneSound" src="drone.mp3" loop></audio>
+<audio id="afterSound" src="after_horror.mp3" loop></audio>
 
 <script>
 let triggered=false, noiseTriggered=false;
-
 document.getElementById("startOverlay").addEventListener("click", function() {
   this.style.display = "none";
-  const allAudios = [
-    document.getElementById("droneSound"), 
-    document.getElementById("afterSound"), 
-    document.getElementById("ambienceSound"), 
-    document.getElementById("scareSound"), 
-    document.getElementById("noiseSound")
-  ];
-  allAudios.forEach(a => {
-      a.load();
-      a.muted = true; // 一瞬ミュートで再生して許可を取る
-      a.play().then(() => { a.pause(); a.muted = false; a.currentTime = 0; });
-  });
-  
-  setTimeout(() => {
-    document.getElementById("droneSound").play();
-  }, 100);
+  document.getElementById("droneSound").play();
 });
 
 window.addEventListener("scroll", function(){
   let scroll=window.scrollY, height=document.body.scrollHeight-window.innerHeight;
   if(!noiseTriggered && scroll>height*0.3){ noiseTriggered=true; triggerNoise(); }
-  if(!triggered && scroll>=height-5){ triggered=true; setTimeout(startNandeEffect, 1000); }
+  if(!triggered && scroll>=height-5){ triggered=true; setTimeout(startHorrorEffect, 1000); }
 });
 
 function triggerNoise(){
@@ -134,29 +93,30 @@ function triggerNoise(){
   setTimeout(()=>{ sound.pause(); sound.currentTime=0; noise.style.opacity=0; }, 700);
 }
 
-function startNandeEffect(){
+function startHorrorEffect(){
   document.getElementById("droneSound").pause();
   document.getElementById("ambienceSound").play();
   const overlay=document.getElementById("nandeOverlay");
   overlay.style.display="block";
+  const horrorWords = ["なんで", "お前が死ね", "うしろ", "みてるよ", "ゆるさない", "つぎはお前だ", "たすけて", "かえして", "しね", "くるな", "そこにいるの？", "つかまえた"];
   let count=0;
   let interval=setInterval(function(){
     let span=document.createElement("span");
-    span.className="nande"; span.innerText="なんで";
+    span.className="nande"; 
+    span.innerText = horrorWords[Math.floor(Math.random() * horrorWords.length)];
     span.style.top=Math.random()*100+"%"; span.style.left=Math.random()*100+"%";
     span.style.fontSize=(30+Math.random()*60)+"px";
-    span.style.transform="rotate("+(Math.random()*20-10)+"deg)";
     overlay.appendChild(span);
     count++;
     if(count>150){
       clearInterval(interval);
-      setTimeout(function(){
+      setTimeout(() => {
         overlay.style.display="none";
         document.getElementById("ambienceSound").pause();
         document.getElementById("scaryOverlay").style.display="flex";
         document.getElementById("scareSound").play();
+        setTimeout(endHorrorSite, 3500);
       }, 600);
-      setTimeout(endHorrorSite, 3500);
     }
   }, 25);
 }
@@ -164,69 +124,9 @@ function startNandeEffect(){
 function endHorrorSite(){
   document.getElementById("scaryOverlay").style.display="none";
   document.body.classList.add("blood");
-  
-  // ★一番上までスクロールさせる
   window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // 音楽を afterSound に切り替え
   document.getElementById("afterSound").play();
-  
-  spawnBloodHands();
   corruptText();
-}
-
-function spawnBloodHands(){
-  let handCount=0;
-  const overlay=document.getElementById("handOverlay");
-  let interval=setInterval(function(){
-    function startNandeEffect(){
-  document.getElementById("droneSound").pause();
-  document.getElementById("ambienceSound").play();
-  const overlay=document.getElementById("nandeOverlay");
-  overlay.style.display="block";
-
-  // ★追加：表示したいワードのリスト
-  const horrorWords = [
-    "なんで", "お前が死ね", "うしろ", "みてるよ", 
-    "ゆるさない", "つぎはお前だ", "たすけて", "かえして", 
-    "しね", "くるな", "そこにいるの？", "つかまえた"
-  ];
-
-  let count=0;
-  let interval=setInterval(function(){
-    let span=document.createElement("span");
-    span.className="nande"; 
-
-    // ★修正：ランダムにワードを選択
-    span.innerText = horrorWords[Math.floor(Math.random() * horrorWords.length)];
-
-    span.style.top=Math.random()*100+"%"; 
-    span.style.left=Math.random()*100+"%";
-    span.style.fontSize=(30+Math.random()*60)+"px";
-    span.style.transform="rotate("+(Math.random()*20-10)+"deg)";
-    
-    // 特定のワード（お前が死ね等）だけさらに大きく、赤を濃くする演出も可能です
-    if(span.innerText === "お前が死ね") {
-      span.style.fontWeight = "900";
-      span.style.textShadow = "0 0 10px rgba(255,0,0,0.8)";
-    }
-
-    overlay.appendChild(span);
-    count++;
-
-    if(count>150){
-      clearInterval(interval);
-      setTimeout(function(){
-        overlay.style.display="none";
-        document.getElementById("ambienceSound").pause();
-        document.getElementById("scaryOverlay").style.display="flex";
-        document.getElementById("scareSound").play();
-      }, 600);
-      setTimeout(endHorrorSite, 3500);
-    }
-  }, 25);
-}
-  }, 900);
 }
 
 function corruptText(){
